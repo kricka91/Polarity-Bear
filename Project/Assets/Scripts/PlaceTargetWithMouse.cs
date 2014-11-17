@@ -21,9 +21,12 @@ public class PlaceTargetWithMouse : MonoBehaviour
 	}
 
 	void placeMagnet(bool attract) {
+		int layerMask = 1 << 8;
+		layerMask = ~layerMask;
+
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
-		if (!Physics.Raycast(ray, out hit)) return;
+		if (!Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask)) return;
 		//            transform.position = hit.point + hit.normal*surfaceOffset;
 		Instantiate(attract ? magnetAttracting : magnetRepelling, hit.point + hit.normal*surfaceOffset, transform.rotation);
 
