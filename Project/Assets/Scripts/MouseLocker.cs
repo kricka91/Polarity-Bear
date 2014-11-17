@@ -9,8 +9,8 @@ public class MouseLocker : MonoBehaviour {
 
 	void Start() {
 //		Screen.lockCursor = true;
-		crosshairDimension.x = 60;
-		crosshairDimension.y = 60;
+		crosshairDimension.x = 40;
+		crosshairDimension.y = 40;
 		yOffset = 30;
 	}
 
