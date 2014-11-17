@@ -5,9 +5,10 @@ public class PlaceTargetWithMouse : MonoBehaviour
 {
 
 	public float surfaceOffset = 1.5f;
-	public GameObject setTargetOn;
 	public Transform magnetAttracting;
 	public Transform magnetRepelling;
+	public const int playerLayer = 8;
+	public const int magnetLayer = 9;
 		
 
 	// Update is called once per frame
@@ -21,19 +22,25 @@ public class PlaceTargetWithMouse : MonoBehaviour
 	}
 
 	void placeMagnet(bool attract) {
-		int layerMask = 1 << 8;
-		layerMask = ~layerMask;
+		int layerMask = 1 << playerLayer; //hit only the player layer
+		layerMask = ~layerMask; //inverse
 
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
-		if (!Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask)) return;
+		if (!Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))return; // if we hit nothing, or the player
 		//            transform.position = hit.point + hit.normal*surfaceOffset;
-		Instantiate(attract ? magnetAttracting : magnetRepelling, hit.point + hit.normal*surfaceOffset, transform.rotation);
 
-		if (setTargetOn != null)
-		{
-			setTargetOn.SendMessage("SetTarget", this.transform);
+		layerMask = 1 << magnetLayer; //hit only the magnet layer
+//		layerMask = ~layerMask; //inverse
+		if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask)) {
+			Debug.DrawRay(transform.position, transform.TransformDirection (Vector3.forward) * hit.distance, Color.yellow);
+			Instantiate(attract ? magnetAttracting : magnetRepelling, hit.transform.position, transform.rotation);
+			Destroy(hit.transform.gameObject);
 		}
+		else {
+			Instantiate(attract ? magnetAttracting : magnetRepelling, hit.point + hit.normal*surfaceOffset, transform.rotation);
+		}
+
 	}
 }
 
