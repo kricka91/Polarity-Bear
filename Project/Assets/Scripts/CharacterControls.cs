@@ -51,7 +51,9 @@ public class CharacterControls : MonoBehaviour {
 	
 	void OnCollisionStay (Collision collisionInfo) {
 		if(collisionInfo.gameObject.tag == "Ground")
-			grounded = true;    
+			grounded = true;
+		else if(collisionInfo.gameObject.tag == "Lethal")
+			Application.LoadLevel(Application.loadedLevel);
 	}
 	
 	float CalculateJumpVerticalSpeed () {
