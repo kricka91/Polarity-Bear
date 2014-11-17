@@ -8,7 +8,7 @@ using System;
 public class CharacterControls : MonoBehaviour {
 	
 	public float speed = 10.0f;
-	public float gravity = 10.0f;
+	public float gravity = 40.0f;
 	public float maxVelocityChange = 10.0f;
 	public float airMultiplier = 0.1f;
 	public bool canJump = true;
@@ -49,8 +49,9 @@ public class CharacterControls : MonoBehaviour {
 		grounded = false;
 	}
 	
-	void OnCollisionStay () {
-		grounded = true;    
+	void OnCollisionStay (Collision collisionInfo) {
+		if(collisionInfo.gameObject.tag == "Ground")
+			grounded = true;    
 	}
 	
 	float CalculateJumpVerticalSpeed () {

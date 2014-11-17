@@ -7,7 +7,7 @@ public class PlaceTargetWithMouse : MonoBehaviour
 	public float surfaceOffset = 1.5f;
 	public Transform magnetAttracting;
 	public Transform magnetRepelling;
-	public const int playerLayer = 8;
+	public const int unpolarLayer = 8;
 	public const int magnetLayer = 9;
 		
 
@@ -22,7 +22,7 @@ public class PlaceTargetWithMouse : MonoBehaviour
 	}
 
 	void placeMagnet(bool attract) {
-		int layerMask = 1 << playerLayer; //hit only the player layer
+		int layerMask = 1 << unpolarLayer; //hit only the player layer
 		layerMask = ~layerMask; //inverse
 
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
