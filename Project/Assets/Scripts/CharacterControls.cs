@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 [RequireComponent (typeof (Rigidbody))]
 [RequireComponent (typeof (CapsuleCollider))]
@@ -40,6 +41,19 @@ public class CharacterControls : MonoBehaviour {
 			if (canJump && Input.GetButton("Jump")) {
 				rigidbody.velocity = new Vector3(velocity.x, CalculateJumpVerticalSpeed(), velocity.z);
 			}
+		} else {
+			// Calculate how fast we should be moving
+			Vector3 velocity = rigidbody.velocity;
+			Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), velocity.y, Input.GetAxis("Vertical"));
+			targetVelocity = transform.TransformDirection(targetVelocity);
+			targetVelocity *= speed;
+			
+			// Apply a force that attempts to reach our target velocity
+			Vector3 velocityChange = (targetVelocity - velocity);
+			velocityChange.x = Mathf.Clamp(velocityChange.x, -maxAirVelocityChange, maxVelocityChange);
+			velocityChange.z = Mathf.Clamp(velocityChange.z, -maxAirVelocityChange, maxVelocityChange);
+			velocityChange.y = 0;
+			rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
 		}
 		
 		// We apply gravity manually for more tuning control
