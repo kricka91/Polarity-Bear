@@ -2,14 +2,17 @@
 using System.Collections;
 
 public class MouseLocker : MonoBehaviour {
-	
+
+	void Start() {
+//		Screen.lockCursor = true;
+	}
 
 
 	void Update() {
 
 		if (Input.GetKeyDown("escape"))
 			Screen.lockCursor = false;
-		if(Input.GetMouseButtonDown(1)) {
+		if(Input.GetKeyDown(KeyCode.L)) {
 			Screen.lockCursor = true;
 		}
 
