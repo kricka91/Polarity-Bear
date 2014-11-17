@@ -3,8 +3,22 @@ using System.Collections;
 
 public class MouseLocker : MonoBehaviour {
 
+	public Texture2D crosshairImage;
+	private Vector2 crosshairDimension;
+	private int yOffset;
+
 	void Start() {
 //		Screen.lockCursor = true;
+		crosshairDimension.x = 60;
+		crosshairDimension.y = 60;
+		yOffset = 30;
+	}
+
+	void OnGUI()
+	{
+		float xMin = (Screen.width / 2) - (crosshairDimension.x / 2);
+		float yMin = ((Screen.height / 2) - (crosshairDimension.y / 2)) - yOffset;
+		GUI.DrawTexture(new Rect(xMin, yMin, crosshairDimension.x, crosshairDimension.y), crosshairImage);
 	}
 
 
