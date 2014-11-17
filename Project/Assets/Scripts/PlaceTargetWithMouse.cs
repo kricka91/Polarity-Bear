@@ -6,7 +6,8 @@ public class PlaceTargetWithMouse : MonoBehaviour
 
 	public float surfaceOffset = 1.5f;
 	public GameObject setTargetOn;
-		public GameObject magnet;
+	public Transform magnetAttracting;
+	public Transform magnetRepelling;
 		
 
 	// Update is called once per frame
@@ -24,9 +25,8 @@ public class PlaceTargetWithMouse : MonoBehaviour
 		RaycastHit hit;
 		if (!Physics.Raycast(ray, out hit)) return;
 		//            transform.position = hit.point + hit.normal*surfaceOffset;
-		GameObject magnetClone = (GameObject) Instantiate(magnet, hit.point + hit.normal*surfaceOffset, transform.rotation);
-		StaticObjectMagnet newMagnet = magnetClone.GetComponent<StaticObjectMagnet>();
-		newMagnet.power *= attract ? -1 : 1;
+		Instantiate(attract ? magnetAttracting : magnetRepelling, hit.point + hit.normal*surfaceOffset, transform.rotation);
+
 		if (setTargetOn != null)
 		{
 			setTargetOn.SendMessage("SetTarget", this.transform);
