@@ -8,14 +8,15 @@ using System;
 public class CharacterControls : MonoBehaviour {
 	
 	public float speed = 10.0f;
-	public float gravity = 40.0f;
+	public float gravity = 17.0f;
 	public float maxVelocityChange = 100.0f;
 	public float airMultiplier = 0.1f;
 	public bool canJump = true;
 	public float jumpHeight = 2.0f;
 	private bool grounded = false;
 	bool affectedByPolarity = false;
-	public float xzAirDrag = 0.985f;
+//	public float xzAirDrag = 0.985f;
+	float xzAirDrag = 0.4f;
 	
 	
 	void Awake () {
@@ -47,6 +48,8 @@ public class CharacterControls : MonoBehaviour {
 		} else {
 			// Calculate how fast we should be moving
 			Vector3 addedVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+//			addedVelocity *= xzAirDrag;
+			addedVelocity *= xzAirDrag;
 			addedVelocity *= speed * airMultiplier;
 			
 			// Apply a force that attempts to reach our target velocity
@@ -81,7 +84,7 @@ public class CharacterControls : MonoBehaviour {
 	
 	void Update(){
 		// Add air resistance
-		rigidbody.velocity = new Vector3(rigidbody.velocity.x*xzAirDrag, rigidbody.velocity.y, rigidbody.velocity.z*xzAirDrag);	
+//		rigidbody.velocity = new Vector3(rigidbody.velocity.x*xzAirDrag, rigidbody.velocity.y, rigidbody.velocity.z*xzAirDrag);	
 	}
 	
 	void OnCollisionStay (Collision collisionInfo) {
