@@ -12,7 +12,7 @@ public class StaticObjectMagnet : MonoBehaviour {
 //		MeshRenderer mr = triggerSphere.GetComponent (MeshRenderer);
 //		mr.enabled = false;
 //		triggerSphere.collider.isTrigger = true;
-		players = GameObject.FindGameObjectsWithTag ("Player");
+		players = GameObject.FindGameObjectsWithTag ("Polarized");
 	}
 	
 	// Update is called once per frame
@@ -21,14 +21,14 @@ public class StaticObjectMagnet : MonoBehaviour {
 			float distance = Vector3.Distance (gameObject.transform.position, player.transform.position);
 			CharacterControls character = player.GetComponent<CharacterControls>();
 			if (distance < radius) {
-				character.setAffectedByPolarity(true);
+				if (character != null) character.setAffectedByPolarity(true);
 				float tmp = ((radius - distance)/radius);
 				float magnitude = power*tmp*tmp;
 				Vector3 dirVector = player.transform.position - gameObject.transform.position;
 				Vector3.Normalize(dirVector); 
 				player.rigidbody.velocity += (charge * magnitude * dirVector);
 			} else {
-				character.setAffectedByPolarity(false);
+				if (character != null) character.setAffectedByPolarity(false);
 			}
 		}
 	}
