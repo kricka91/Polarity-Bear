@@ -33,6 +33,7 @@ public class MouseLocker : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.R)) {
 			Application.LoadLevel(Application.loadedLevel);
 		}
+
 		/*
 		if (!Screen.lockCursor && wasLocked) {
 			wasLocked = false;

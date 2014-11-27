@@ -25,6 +25,14 @@ ModelImporter:
     100038: Symmetrie_Arm_11_Light1
     100040: Torus
     100042: White_Shell_1
+    100044: Torus_000
+    100046: Torus_001
+    100048: Torus_002
+    100050: Torus_003
+    100052: Torus_004
+    100054: Torus_005
+    100056: Torus_006
+    100058: Torus_007
     400000: Battery_Housing
     400002: Cable
     400004: Cable_MeshPart0
@@ -47,6 +55,14 @@ ModelImporter:
     400038: Symmetrie_Arm_11_Light1
     400040: Torus
     400042: White_Shell_1
+    400044: Torus_000
+    400046: Torus_001
+    400048: Torus_002
+    400050: Torus_003
+    400052: Torus_004
+    400054: Torus_005
+    400056: Torus_006
+    400058: Torus_007
     2300000: Battery_Housing
     2300002: Cable_MeshPart0
     2300004: Cable_MeshPart1
@@ -67,6 +83,14 @@ ModelImporter:
     2300034: Symmetrie_Arm_11_Light1
     2300036: Torus
     2300038: White_Shell_1
+    2300040: Torus_000
+    2300042: Torus_001
+    2300044: Torus_002
+    2300046: Torus_003
+    2300048: Torus_004
+    2300050: Torus_005
+    2300052: Torus_006
+    2300054: Torus_007
     3300000: Battery_Housing
     3300002: Cable_MeshPart0
     3300004: Cable_MeshPart1
@@ -87,6 +111,14 @@ ModelImporter:
     3300034: Symmetrie_Arm_11_Light1
     3300036: Torus
     3300038: White_Shell_1
+    3300040: Torus_000
+    3300042: Torus_001
+    3300044: Torus_002
+    3300046: Torus_003
+    3300048: Torus_004
+    3300050: Torus_005
+    3300052: Torus_006
+    3300054: Torus_007
     4300000: Torus
     4300002: Symmetrie_Arm_11_Lamp1
     4300004: Symmetrie_Arm_11_Light1
@@ -107,6 +139,14 @@ ModelImporter:
     4300034: ns
     4300036: mag_001
     4300038: ns_001
+    4300040: Torus_000
+    4300042: Torus_001
+    4300044: Torus_002
+    4300046: Torus_003
+    4300048: Torus_004
+    4300050: Torus_005
+    4300052: Torus_006
+    4300054: Torus_007
     7400000: Default Take
     9500000: //RootNode
   materials:
