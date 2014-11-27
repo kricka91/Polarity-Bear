@@ -15,7 +15,7 @@ public class CharacterControls : MonoBehaviour {
 	public float jumpHeight = 2.0f;
 	private bool grounded = false;
 	bool affectedByPolarity = false;
-	
+	public float xzAirDrag = 0.985f;
 	
 	
 	void Awake () {
@@ -64,8 +64,8 @@ public class CharacterControls : MonoBehaviour {
 			}
 			addedVelocity.y = 0; 
 
-			addedVelocity = transform.TransformDirection(addedVelocity);
-
+			addedVelocity = transform.TransformDirection(addedVelocity);			
+			
 			rigidbody.AddForce(addedVelocity, ForceMode.VelocityChange);
 			
 			// Jump
@@ -77,6 +77,11 @@ public class CharacterControls : MonoBehaviour {
 		rigidbody.AddForce(new Vector3 (0, -gravity * rigidbody.mass, 0));
 		
 		grounded = false;
+	}
+	
+	void Update(){
+		// Add air resistance
+		rigidbody.velocity = new Vector3(rigidbody.velocity.x*xzAirDrag, rigidbody.velocity.y, rigidbody.velocity.z*xzAirDrag);	
 	}
 	
 	void OnCollisionStay (Collision collisionInfo) {
