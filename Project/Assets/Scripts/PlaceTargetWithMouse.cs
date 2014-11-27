@@ -20,7 +20,7 @@ public class PlaceTargetWithMouse : MonoBehaviour
 			placeMagnet(false);
 		else if (Input.GetMouseButtonDown(1))
 			placeMagnet(true);
-	    else if (Input.GetMouseButtonDown(2))
+	    else if (Input.GetMouseButtonDown(2) || Input.GetKey("left ctrl") && Input.GetMouseButton(0))
 			neutralizeMagnet();
 	}
 
