@@ -69,6 +69,8 @@ public class PlaceTargetWithMouse : MonoBehaviour
 		//		layerMask = ~layerMask; //inverse
 		if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask)) {
 			Destroy(hit.transform.gameObject);
+			CharacterControls character = gameObject.GetComponent<CharacterControls>();
+			if (character != null) character.setAffectedByPolarity(false);
 			return;
 		}
 	}
