@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\Button.cs" />
      <Compile Include="Assets\Scripts\ButtonLight.cs" />
      <Compile Include="Assets\Scripts\CharacterControls.cs" />
+     <Compile Include="Assets\Scripts\EnableByButton.cs" />
      <Compile Include="Assets\Scripts\IButtonListener.cs" />
      <Compile Include="Assets\Scripts\MouseLocker.cs" />
      <Compile Include="Assets\Scripts\PlaceTargetWithMouse.cs" />
