@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Goal : MonoBehaviour {
+public class Goal : MonoBehaviour, IButtonListener {
 
 	IGoalListener[] myListeners;
+	private Behaviour halo;
+	   
 	public GameObject[] listeners;
 	
 	void Awake() {
@@ -11,6 +13,7 @@ public class Goal : MonoBehaviour {
 		for (int i = 0; i < listeners.Length; ++i) {
 				myListeners [i] = (IGoalListener)listeners[i].GetComponent(typeof(IGoalListener));
 		}
+		halo = (Behaviour)GetComponent("Halo");
 	}
 
 	void OnTriggerEnter(Collider other){
@@ -18,5 +21,13 @@ public class Goal : MonoBehaviour {
 			foreach(IGoalListener listener in myListeners)
 				listener.onPlayerEnter();
 		}
+	}
+
+	// Enable the halo when something presses the button
+	public void onButtonPressed(){ 
+		halo.enabled = true;
+	}
+	public void onButtonReleased(){
+		halo.enabled = false;
 	}
 }
