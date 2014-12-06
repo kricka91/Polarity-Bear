@@ -6,6 +6,8 @@ using System;
 [RequireComponent (typeof (CapsuleCollider))]
 
 public class CharacterControls : MonoBehaviour {
+
+	public bool groundControlEnable = true;
 	
 	public float speed = 10.0f;
 	public float gravity = 17.0f;
@@ -25,22 +27,24 @@ public class CharacterControls : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-		if (grounded/* && !affectedByPolarity*/) {
-			// Calculate how fast we should be moving
-			/*Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-			targetVelocity *= speed;
-			
-			// Apply a force that attempts to reach our target velocity
-			Vector3 velocity = rigidbody.velocity;
-			targetVelocity = transform.TransformDirection(targetVelocity);
+		if (grounded) {
+			if(groundControlEnable && !affectedByPolarity) {
+				// Calculate how fast we should be moving
+				Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+				targetVelocity *= speed;
+				
+				// Apply a force that attempts to reach our target velocity
+				Vector3 velocity = rigidbody.velocity;
+				targetVelocity = transform.TransformDirection(targetVelocity);
 
-			Vector3 velocityChange = (targetVelocity - velocity);
-			velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
-			velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
-			velocityChange.y = 0;
+				Vector3 velocityChange = (targetVelocity - velocity);
+				velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
+				velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
+				velocityChange.y = 0;
 
-			rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);*/
-			
+				rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
+			}
+
 			// Jump
 			if (grounded && canJump && Input.GetButton("Jump")) {
 				rigidbody.velocity = new Vector3(rigidbody.velocity.x, CalculateJumpVerticalSpeed(), rigidbody.velocity.z);
