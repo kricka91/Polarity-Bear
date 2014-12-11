@@ -115,7 +115,7 @@ public class PlaceTargetWithMouse : MonoBehaviour
 		else {
 			
 			magnet.gameObject.SetActive(true);
-			Vector3 targetPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+			Vector3 targetPosition = hit.point + hit.normal*surfaceOffset;
 			magnet.position = targetPosition;
 			return;
 		}
