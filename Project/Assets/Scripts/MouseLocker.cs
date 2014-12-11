@@ -5,13 +5,13 @@ public class MouseLocker : MonoBehaviour {
 
 	public Texture2D crosshairImage;
 	private Vector2 crosshairDimension;
-	private int yOffset;
+	private int yOffset = 0;
 
 	void Start() {
 //		Screen.lockCursor = true;
 		crosshairDimension.x = 40;
 		crosshairDimension.y = 40;
-		yOffset = 30;
+		//yOffset = 30;
 	}
 
 	void OnGUI()
