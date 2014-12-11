@@ -18,7 +18,7 @@ public class CharacterControls : MonoBehaviour {
 	private bool grounded = false;
 	bool affectedByPolarity = false;
 //	public float xzAirDrag = 0.985f;
-	float xzAirDrag = 0.4f;
+	float xzAirDrag = 1f;
 	
 	
 	void Awake () {
@@ -52,8 +52,6 @@ public class CharacterControls : MonoBehaviour {
 		} else {
 			// Calculate how fast we should be moving
 			Vector3 addedVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-//			addedVelocity *= xzAirDrag;
-			addedVelocity *= xzAirDrag;
 			addedVelocity *= speed * airMultiplier;
 			
 			// Apply a force that attempts to reach our target velocity
@@ -69,12 +67,12 @@ public class CharacterControls : MonoBehaviour {
 			} else {
 				addedVelocity.z = Mathf.Clamp(addedVelocity.z, -maxVelocityChange, maxVelocityChange);
 			}
-			addedVelocity.y = 0; 
+			addedVelocity.y = 0; 		
+			
+			rigidbody.AddRelativeForce(addedVelocity, ForceMode.VelocityChange);
 
-			addedVelocity = transform.TransformDirection(addedVelocity);			
-			
-			rigidbody.AddForce(addedVelocity, ForceMode.VelocityChange);
-			
+			rigidbody.AddForce(-rigidbody.velocity * xzAirDrag);
+
 			// Jump
 			if (grounded && canJump && Input.GetButton("Jump")) {
 				rigidbody.velocity = new Vector3(velocity.x, CalculateJumpVerticalSpeed(), velocity.z);
