@@ -15,6 +15,7 @@ public class PlaceTargetWithMouse : MonoBehaviour
 	public bool holdDownButtons = false;
 	private Transform attractMagnet;
 	private Transform repelMagnet;
+	public AudioSource audio1, audio2;
 
 	public int maxNumMagnets = 4;
 	private int curPlacedMagnets = 0;
@@ -84,6 +85,11 @@ public class PlaceTargetWithMouse : MonoBehaviour
 			if(curPlacedMagnets > maxNumMagnets-1) {
 				destroyMagnet(placedMagnets[0]);
 			}
+			if (attract) {
+				audio1.Play ();
+			} else {
+				audio2.Play();
+			}
 			placedMagnets.Add((Transform)Instantiate(attract ? magnetAttracting : magnetRepelling, hit.point + hit.normal*surfaceOffset, transform.rotation));
 		}
 		curPlacedMagnets++;
@@ -129,16 +135,15 @@ public class PlaceTargetWithMouse : MonoBehaviour
 		else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Unpolar")) return; // if we hit unpolar
 
 		layerMask = 1 << magnetLayer; //hit only the magnet layer
-		//		layerMask = ~layerMask; //inverse
-		if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask)) {
-			return;
-		}
-		else {
-			
-			magnet.gameObject.SetActive(true);
-			Vector3 targetPosition = hit.point + hit.normal*surfaceOffset;
-			magnet.position = targetPosition;
-			return;
+		layerMask = ~layerMask; //inverse
+
+		magnet.gameObject.SetActive(true);
+		Vector3 targetPosition = hit.point + hit.normal*surfaceOffset;
+		magnet.position = targetPosition;
+		if (magnet.Equals (attractMagnet)) {
+			audio1.Play ();
+		} else {
+			audio2.Play();
 		}
 	}
 
