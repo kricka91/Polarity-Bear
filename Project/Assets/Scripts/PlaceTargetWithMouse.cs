@@ -102,7 +102,7 @@ public class PlaceTargetWithMouse : MonoBehaviour
 		int layerMask = 1 << playerLayer; //hit only the player layer
 		layerMask = ~layerMask; //inverse
 		
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width/2, Screen.height/2));
 		RaycastHit hit;
 		if (!Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))return; // if we hit nothing, or the player
 		else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Unpolar")) return; // if we hit unpolar
