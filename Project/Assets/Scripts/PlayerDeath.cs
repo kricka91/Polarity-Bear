@@ -30,7 +30,7 @@ public class PlayerDeath : MonoBehaviour {
 		
 		if(player.transform.position.y < fallEnd){
 			Debug.Log("Player has fallen into the void");
-			Application.LoadLevel (Application.loadedLevelName);
+			GameManager.GameOver();
 		}
 	}
 }

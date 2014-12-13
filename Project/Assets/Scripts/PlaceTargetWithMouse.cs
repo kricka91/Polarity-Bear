@@ -19,12 +19,14 @@ public class PlaceTargetWithMouse : MonoBehaviour
 	public int maxNumMagnets = 4;
 	private int curPlacedMagnets = 0;
 	private List<Transform> placedMagnets = new List<Transform>();
+
+	private bool myEnabled;
 		
 	private void Start() {
 //		placedMagnets = new Transform[maxNumMagnets];
 		if (holdDownButtons) {
 			attractMagnet = (Transform)Instantiate(magnetAttracting, Vector3.zero, Quaternion.identity);
-			repelMagnet =  (Transform)Instantiate(magnetRepelling, Vector3.zero, Quaternion.identity);
+			repelMagnet = (Transform)Instantiate(magnetRepelling, Vector3.zero, Quaternion.identity);
 
 			attractMagnet.gameObject.SetActive(false);
 			repelMagnet.gameObject.SetActive(false);
@@ -33,6 +35,9 @@ public class PlaceTargetWithMouse : MonoBehaviour
 	// Update is called once per frame
 	private void Update()
 	{
+		if(!myEnabled)
+			return;
+
 		if (holdDownButtons) {
 			if (Input.GetMouseButtonDown(0))
 				activateMagnet(repelMagnet);
@@ -141,6 +146,10 @@ public class PlaceTargetWithMouse : MonoBehaviour
 		magnet.gameObject.SetActive (false);
 		CharacterControls character = gameObject.GetComponent<CharacterControls>();
 		if (character != null) character.setAffectedByPolarity(false);
+	}
+
+	public void setEnabled(bool enabled) {
+		this.myEnabled = enabled;
 	}
 }
 
