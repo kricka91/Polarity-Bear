@@ -27,28 +27,27 @@ public class CharacterControls : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-		if (grounded) {
-			if(groundControlEnable && !affectedByPolarity) {
-				// Calculate how fast we should be moving
-				Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-				targetVelocity *= speed;
-				
-				// Apply a force that attempts to reach our target velocity
-				Vector3 velocity = rigidbody.velocity;
-				targetVelocity = transform.TransformDirection(targetVelocity);
+		
+		// Jump
+		if (grounded && canJump && Input.GetButton("Jump")) {
+			rigidbody.velocity = new Vector3(rigidbody.velocity.x, CalculateJumpVerticalSpeed(), rigidbody.velocity.z);
+		} 
 
-				Vector3 velocityChange = (targetVelocity - velocity);
-				velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
-				velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
-				velocityChange.y = 0;
+		if(grounded && groundControlEnable && !affectedByPolarity) {
+			// Calculate how fast we should be moving
+			Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+			targetVelocity *= speed;
+			
+			// Apply a force that attempts to reach our target velocity
+			Vector3 velocity = rigidbody.velocity;
+			targetVelocity = transform.TransformDirection(targetVelocity);
 
-				rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
-			}
+			Vector3 velocityChange = (targetVelocity - velocity);
+			velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
+			velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
+			velocityChange.y = 0;
 
-			// Jump
-			if (grounded && canJump && Input.GetButton("Jump")) {
-				rigidbody.velocity = new Vector3(rigidbody.velocity.x, CalculateJumpVerticalSpeed(), rigidbody.velocity.z);
-			}
+			rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
 		} else {
 			// Calculate how fast we should be moving
 			Vector3 addedVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -71,7 +70,8 @@ public class CharacterControls : MonoBehaviour {
 			
 			rigidbody.AddRelativeForce(addedVelocity, ForceMode.VelocityChange);
 
-			rigidbody.AddForce(-rigidbody.velocity * xzAirDrag);
+			// Air Resistance
+			rigidbody.AddForce(-rigidbody.velocity.x * xzAirDrag, 0, -rigidbody.velocity.z * xzAirDrag);
 
 			// Jump
 			if (grounded && canJump && Input.GetButton("Jump")) {
