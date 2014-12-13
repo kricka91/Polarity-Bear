@@ -152,4 +152,3 @@ public class PlaceTargetWithMouse : MonoBehaviour
 		this.myEnabled = enabled;
 	}
 }
-
