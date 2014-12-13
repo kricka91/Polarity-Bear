@@ -1,5 +1,6 @@
-﻿using UnityEngine;
-
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 
 public class PlaceTargetWithMouse : MonoBehaviour
@@ -14,8 +15,13 @@ public class PlaceTargetWithMouse : MonoBehaviour
 	public bool holdDownButtons = false;
 	private Transform attractMagnet;
 	private Transform repelMagnet;
+
+	public int maxNumMagnets = 4;
+	private int curPlacedMagnets = 0;
+	private List<Transform> placedMagnets = new List<Transform>();
 		
 	private void Start() {
+//		placedMagnets = new Transform[maxNumMagnets];
 		if (holdDownButtons) {
 			attractMagnet = (Transform)Instantiate(magnetAttracting, Vector3.zero, Quaternion.identity);
 			repelMagnet =  (Transform)Instantiate(magnetRepelling, Vector3.zero, Quaternion.identity);
@@ -47,6 +53,9 @@ public class PlaceTargetWithMouse : MonoBehaviour
 	}
 
 	void placeMagnet(bool attract) {
+
+
+
 		int layerMask = 1 << playerLayer; //hit only the player layer
 		layerMask = ~layerMask; //inverse
 
@@ -63,15 +72,16 @@ public class PlaceTargetWithMouse : MonoBehaviour
 //		layerMask = ~layerMask; //inverse
 		if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask)) {
 			Debug.DrawRay(transform.position, transform.TransformDirection (Vector3.forward) * hit.distance, Color.yellow);
-			Instantiate(attract ? magnetAttracting : magnetRepelling, hit.transform.position, transform.rotation);
-			Destroy(hit.transform.gameObject);
-			return;
+			placedMagnets.Add((Transform)Instantiate(attract ? magnetAttracting : magnetRepelling, hit.transform.position, transform.rotation));
+			destroyMagnet(hit.transform);
 		}
 		else {
-
-			Instantiate(attract ? magnetAttracting : magnetRepelling, hit.point + hit.normal*surfaceOffset, transform.rotation);
+			if(curPlacedMagnets > maxNumMagnets-1) {
+				destroyMagnet(placedMagnets[0]);
+			}
+			placedMagnets.Add((Transform)Instantiate(attract ? magnetAttracting : magnetRepelling, hit.point + hit.normal*surfaceOffset, transform.rotation));
 		}
-
+		curPlacedMagnets++;
 	}
 
 	void neutralizeMagnet() {
@@ -90,11 +100,17 @@ public class PlaceTargetWithMouse : MonoBehaviour
 		layerMask = 1 << magnetLayer; //hit only the magnet layer
 		//		layerMask = ~layerMask; //inverse
 		if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask)) {
-			Destroy(hit.transform.gameObject);
-			CharacterControls character = gameObject.GetComponent<CharacterControls>();
-			if (character != null) character.setAffectedByPolarity(false);
+			destroyMagnet(hit.transform);
 			return;
 		}
+	}
+
+	private void destroyMagnet(Transform magnet) {
+		placedMagnets.Remove(magnet);
+		Destroy(magnet.gameObject);
+		CharacterControls character = gameObject.GetComponent<CharacterControls>();
+		if (character != null) character.setAffectedByPolarity(false);
+		curPlacedMagnets--;
 	}
 
 	private void activateMagnet(Transform magnet) {
