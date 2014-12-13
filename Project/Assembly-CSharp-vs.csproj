@@ -53,6 +53,7 @@
      <Compile Include="Assets\Scripts\Goal.cs" />
      <Compile Include="Assets\Scripts\IButtonListener.cs" />
      <Compile Include="Assets\Scripts\IGoalListener.cs" />
+     <Compile Include="Assets\Scripts\Magnet.cs" />
      <Compile Include="Assets\Scripts\MouseLocker.cs" />
      <Compile Include="Assets\Scripts\PlaceTargetWithMouse.cs" />
      <Compile Include="Assets\Scripts\PlayerDeath.cs" />
