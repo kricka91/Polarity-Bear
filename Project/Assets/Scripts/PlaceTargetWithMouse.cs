@@ -11,6 +11,8 @@ public class PlaceTargetWithMouse : MonoBehaviour
 	public const int unpolarLayer = 8;
 	public const int magnetLayer = 9;
 	public const int playerLayer = 10;
+	public AudioSource audio1;
+	public AudioSource audio2;
 		
 
 	// Update is called once per frame
@@ -46,7 +48,11 @@ public class PlaceTargetWithMouse : MonoBehaviour
 			return;
 		}
 		else {
-
+			if (attract) {
+				audio1.Play(); 
+			} else {
+				audio2.Play();
+			}
 			Instantiate(attract ? magnetAttracting : magnetRepelling, hit.point + hit.normal*surfaceOffset, transform.rotation);
 		}
 
