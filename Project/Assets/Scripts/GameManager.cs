@@ -147,9 +147,9 @@ public class GameManager : MonoBehaviour {
 			restartGame();
 		}
 
-		if(Input.GetKeyDown(KeyCode.I)) { //<------------------ remove in demo? IWIN btn
-			gameCompleted();
-		}
+//		if(Input.GetKeyDown(KeyCode.I)) { //<------------------ remove in demo? IWIN btn
+//			gameCompleted();
+//		}
 
 		if(Input.GetKeyDown(KeyCode.F1)) {
 			Application.LoadLevel(0);
