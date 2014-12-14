@@ -15,7 +15,7 @@ public class Magnet : MonoBehaviour {
 	}
 
 
-	void FixedUpdate () {
+	void Update () {
 		foreach (GameObject player in players) {
 			Vector3 playerPosition = player.transform.position;
 			float distance = Vector3.Distance (gameObject.transform.position, playerPosition);
@@ -26,7 +26,7 @@ public class Magnet : MonoBehaviour {
 				float magnitude = power*tmp*tmp;
 				Vector3 dirVector = playerPosition - gameObject.transform.position;
 				Vector3.Normalize(dirVector); 
-				player.rigidbody.velocity += (magnitude * dirVector);
+				player.rigidbody.velocity += (magnitude * dirVector) * Time.deltaTime * 60;
 			} else {
 				if (character != null) character.setAffectedByPolarity(false);
 			}

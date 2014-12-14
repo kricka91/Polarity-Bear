@@ -15,7 +15,7 @@ public class StaticObjectMagnet : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
 		foreach (GameObject player in players) {
 			Vector3 playerPosition = player.transform.position;
 			Vector3 closestPointOnMesh = collider.ClosestPointOnBounds(playerPosition);
@@ -27,7 +27,7 @@ public class StaticObjectMagnet : MonoBehaviour {
 				float magnitude = power*tmp*tmp;
 				Vector3 dirVector = playerPosition - closestPointOnMesh;
 				Vector3.Normalize(dirVector); 
-				player.rigidbody.velocity += (magnitude * dirVector);
+				player.rigidbody.velocity += (magnitude * dirVector) * Time.deltaTime * 60;
 			} else {
 				if (character != null) character.setAffectedByPolarity(false);
 			}
