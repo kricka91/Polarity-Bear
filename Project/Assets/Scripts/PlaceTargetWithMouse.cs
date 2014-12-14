@@ -17,6 +17,9 @@ public class PlaceTargetWithMouse : MonoBehaviour
 	private Transform repelMagnet;
 	public AudioSource audio1, audio2;
 
+	public GameObject blueLight;
+	public GameObject yellowLight;
+
 	public int maxNumMagnets = 4;
 	private int curPlacedMagnets = 0;
 	private List<Transform> placedMagnets = new List<Transform>();
@@ -125,6 +128,11 @@ public class PlaceTargetWithMouse : MonoBehaviour
 	}
 
 	private void activateMagnet(Transform magnet) {
+
+		if(magnet == attractMagnet)
+			yellowLight.SetActive(true);
+		else
+			blueLight.SetActive(true);
 		
 		int layerMask = 1 << playerLayer; //hit only the player layer
 		layerMask = ~layerMask; //inverse
@@ -150,6 +158,11 @@ public class PlaceTargetWithMouse : MonoBehaviour
 	}
 
 	private void deactivateMagnet(Transform magnet) {
+		if(magnet == attractMagnet)
+			yellowLight.SetActive(false);
+		else
+			blueLight.SetActive(false);
+
 		magnet.gameObject.SetActive (false);
 		CharacterControls character = gameObject.GetComponent<CharacterControls>();
 		if (character != null) character.setAffectedByPolarity(false);
