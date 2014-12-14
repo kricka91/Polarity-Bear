@@ -30,7 +30,7 @@ public class MouseLook : MonoBehaviour {
 
 	float rotationY = 0F;
 
-	bool enabled = true;
+	bool myEnabled = true;
 
 	void Update ()
 	{
@@ -67,6 +67,6 @@ public class MouseLook : MonoBehaviour {
 	}
 
 	public void setEnabled(bool enabled) {
-		this.enabled = enabled;
+		this.myEnabled = enabled;
 	}
 }

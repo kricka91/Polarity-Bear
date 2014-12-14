@@ -7,7 +7,7 @@ public class EndGameOnTouch : MonoBehaviour {
 	void OnCollisionEnter(Collision collision) {
 		// layer #10 is the player layer
 		if (collision.collider.gameObject.layer == 10) {
-			GameManager.GameOver();
+			GameManager.Instance.gameCompleted();
 		}
 	}
 }
