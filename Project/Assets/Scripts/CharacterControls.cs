@@ -19,7 +19,7 @@ public class CharacterControls : MonoBehaviour {
 	bool affectedByPolarity = false;
 //	public float xzAirDrag = 0.985f;
 	float xzAirDrag = 1f;
-	public AudioSource footsteps;
+	public AudioSource footsteps, jump;
 	
 	void Awake () {
 		rigidbody.freezeRotation = true;
@@ -31,6 +31,7 @@ public class CharacterControls : MonoBehaviour {
 		// Jump
 		if (grounded && canJump && Input.GetButton("Jump")) {
 			rigidbody.velocity = new Vector3(rigidbody.velocity.x, CalculateJumpVerticalSpeed(), rigidbody.velocity.z);
+			jump.Play();
 		} 
 
 		if(grounded && groundControlEnable && !affectedByPolarity) {
@@ -75,6 +76,7 @@ public class CharacterControls : MonoBehaviour {
 
 			// Jump
 			if (grounded && canJump && Input.GetButton("Jump")) {
+				jump.Play();
 				rigidbody.velocity = new Vector3(velocity.x, CalculateJumpVerticalSpeed(), velocity.z);
 			}
 		}
