@@ -109,7 +109,8 @@ public class GameManager : MonoBehaviour {
 	public void nextLevel() {
 		resumeGame();
 		//TODO If we gots more than 2 scenes, change this.
-		Application.LoadLevel(Application.loadedLevel == 0 ? 1 : 0);
+		Debug.Log("Loaded: " + Application.loadedLevel);
+		Application.LoadLevel((Application.loadedLevel == 0) ? 1 : 0);
     }
 
 	void OnGUI() {
