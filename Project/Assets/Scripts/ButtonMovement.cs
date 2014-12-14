@@ -1,15 +1,36 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ButtonMovement : MonoBehaviour {
+public class ButtonMovement : MonoBehaviour, IButtonListener {
+	private Vector3 buttonUpPos, buttonDownPos, targetPos, oldPos;
+	private float timer;
+	public float buttonDisplacement, animationLength;
 
 	// Use this for initialization
 	void Start () {
-	
+		buttonUpPos = gameObject.transform.position;
+		buttonDownPos = buttonUpPos - Vector3.up * buttonDisplacement;
+		timer = animationLength;
+	}
+
+	void Update () {
+
+		if (timer < animationLength) {
+			timer += Time.deltaTime;
+			gameObject.transform.position = Vector3.Lerp (oldPos, targetPos, timer / animationLength);
+		}
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	public void onButtonPressed() {
+		targetPos = buttonDownPos;
+		oldPos = buttonUpPos;
+		timer = 0;
+	}
 	
+	public void onButtonReleased() {
+		targetPos = buttonUpPos;
+		oldPos = buttonDownPos;
+		timer = 0;
 	}
 }
