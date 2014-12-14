@@ -136,14 +136,16 @@ public class PlaceTargetWithMouse : MonoBehaviour
 
 		layerMask = 1 << magnetLayer; //hit only the magnet layer
 		layerMask = ~layerMask; //inverse
-
-		magnet.gameObject.SetActive(true);
-		Vector3 targetPosition = hit.point + hit.normal*surfaceOffset;
-		magnet.position = targetPosition;
-		if (magnet.Equals (attractMagnet)) {
-			audio1.Play ();
-		} else {
-			audio2.Play();
+		
+		if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask)) {
+			magnet.gameObject.SetActive(true);
+			Vector3 targetPosition = hit.point + hit.normal*surfaceOffset;
+			magnet.position = targetPosition;
+			if (magnet.Equals (attractMagnet)) {
+				audio1.Play ();
+			} else {
+				audio2.Play();
+			}
 		}
 	}
 
