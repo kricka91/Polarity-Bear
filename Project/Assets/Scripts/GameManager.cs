@@ -19,10 +19,12 @@ public class GameManager : MonoBehaviour {
 	public MouseLook mouseLookX;
 	public MouseLook mouseLookY;
 	public PlaceTargetWithMouse placer;
+	public CharacterControls charControl;
 
 	public int gameState;
 	public const int GAME_STATE_RUNNING = 0;
 	public const int GAME_STATE_PAUSED = 1;
+	public const int GAME_STATE_COMPLETED = 2;
 	public const int NUM_HIGHSCORES = 5;
 	public string HIGHSCORE_TAG = "highscore";
 
@@ -60,6 +62,7 @@ public class GameManager : MonoBehaviour {
 		Debug.Log("PAUSE");
 		Time.timeScale = 0f;
 		pausePanel.SetActive(enabled);
+		charControl.stopFootsteps();
 		setControlEnabled(false);
 	}
 
@@ -71,11 +74,14 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void restartGame() {
+		charControl.stopFootsteps();
 		resumeGame();
 		Application.LoadLevel(Application.loadedLevel);
 	}
 
 	public void gameCompleted() {
+		gameState = GAME_STATE_COMPLETED;
+		charControl.stopFootsteps();
 		Debug.Log("Game Completed Method");
 		setControlEnabled(false);
 		Time.timeScale = 0f;

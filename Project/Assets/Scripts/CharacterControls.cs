@@ -92,15 +92,27 @@ public class CharacterControls : MonoBehaviour {
 		// play footsteps
 		if (grounded) {
 			if(!footsteps.isPlaying && (Math.Abs(rigidbody.velocity.x) > 0.5 || Math.Abs(rigidbody.velocity.z) > 0.5)){
-				footsteps.Play();
+//				footsteps.Play();
+				playFootsteps();
 			}else if(footsteps.isPlaying && (Math.Abs(rigidbody.velocity.x) < 0.5 && Math.Abs(rigidbody.velocity.z) < 0.5)){
-				footsteps.Stop();
+//				footsteps.Stop();
+				stopFootsteps();
 			}
 		} else {
 			if(footsteps.isPlaying){
-				footsteps.Stop();		
+				stopFootsteps();
+//				footsteps.Stop();		
 			}
 		}
+	}
+
+	public void stopFootsteps() {
+		footsteps.Stop ();
+	}
+
+	public void playFootsteps() {
+		if(GameManager.Instance.gameState == GameManager.GAME_STATE_RUNNING)
+		footsteps.Play ();
 	}
 	
 	void OnCollisionStay (Collision collisionInfo) {
