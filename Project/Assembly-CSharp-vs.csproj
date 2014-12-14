@@ -48,8 +48,11 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Button.cs" />
      <Compile Include="Assets\Scripts\ButtonLight.cs" />
+     <Compile Include="Assets\Scripts\ButtonMagnet.cs" />
+     <Compile Include="Assets\Scripts\ButtonMovement.cs" />
      <Compile Include="Assets\Scripts\CharacterControls.cs" />
      <Compile Include="Assets\Scripts\EnableByButton.cs" />
+     <Compile Include="Assets\Scripts\EndGameOnTouch.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Goal.cs" />
      <Compile Include="Assets\Scripts\IButtonListener.cs" />
