@@ -104,6 +104,12 @@ public class GameManager : MonoBehaviour {
 		highscoresTextField.text = highscoretext;
 	}
 
+	public void nextLevel() {
+		resumeGame();
+		//TODO If we gots more than 2 scenes, change this.
+		Application.LoadLevel(Application.loadedLevel == 0 ? 1 : 0);
+    }
+
 	void OnGUI() {
 		timeTextField.text = "Time: " + System.Math.Round(timer.timeElapsed, 2);
 	}
@@ -135,6 +141,15 @@ public class GameManager : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.I)) { //<------------------ remove in demo? IWIN btn
 			gameCompleted();
 		}
+
+		if(Input.GetKeyDown(KeyCode.F1)) {
+			Application.LoadLevel(0);
+        }
+
+		if(Input.GetKeyDown(KeyCode.F2)) {
+			Application.LoadLevel(1);
+        }
+    
 	}
 
 }
