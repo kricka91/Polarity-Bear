@@ -13,9 +13,9 @@ public class Magnet : MonoBehaviour {
 		//		triggerSphere.collider.isTrigger = true;
 		players = GameObject.FindGameObjectsWithTag ("Polarized");
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+
+	void FixedUpdate () {
 		foreach (GameObject player in players) {
 			Vector3 playerPosition = player.transform.position;
 			float distance = Vector3.Distance (gameObject.transform.position, playerPosition);

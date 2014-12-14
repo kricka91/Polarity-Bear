@@ -15,7 +15,7 @@ public class StaticObjectMagnet : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		foreach (GameObject player in players) {
 			Vector3 playerPosition = player.transform.position;
 			Vector3 closestPointOnMesh = collider.ClosestPointOnBounds(playerPosition);
