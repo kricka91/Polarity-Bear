@@ -21,7 +21,7 @@ public class PlaceTargetWithMouse : MonoBehaviour
 	private int curPlacedMagnets = 0;
 	private List<Transform> placedMagnets = new List<Transform>();
 
-	private bool myEnabled;
+	private bool myEnabled = true;
 		
 	private void Start() {
 //		placedMagnets = new Transform[maxNumMagnets];
