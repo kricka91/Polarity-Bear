@@ -4,12 +4,13 @@ using System.Collections;
 public class ButtonMovement : MonoBehaviour, IButtonListener {
 	private Vector3 buttonUpPos, buttonDownPos, targetPos, oldPos;
 	private float timer;
-	public float buttonDisplacement, animationLength;
+	public Vector3 buttonDisplacement;
+	public float animationLength;
 
 	// Use this for initialization
 	void Start () {
 		buttonUpPos = gameObject.transform.position;
-		buttonDownPos = buttonUpPos - Vector3.up * buttonDisplacement;
+		buttonDownPos = buttonUpPos + buttonDisplacement;
 		timer = animationLength;
 	}
 
