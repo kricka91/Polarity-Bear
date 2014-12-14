@@ -75,6 +75,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void gameCompleted() {
+		Debug.Log("Game Completed Method");
 		setControlEnabled(false);
 		Time.timeScale = 0f;
 		timer.stopTimer();
