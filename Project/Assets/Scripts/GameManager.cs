@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour {
 	public const int GAME_STATE_RUNNING = 0;
 	public const int GAME_STATE_PAUSED = 1;
 	public const int NUM_HIGHSCORES = 5;
-	public const string HIGHSCORE_TAG = "highscore";
+	public string HIGHSCORE_TAG = "highscore";
 
 	//Singleton
 	private static GameManager instance = null;
@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Start() {
+		HIGHSCORE_TAG += "_lvl_" + Application.loadedLevel + "_";
 		gameState = GAME_STATE_RUNNING;
 		resumeGame();
 		Instantiate(eventSystem, Vector3.zero, transform.rotation);
