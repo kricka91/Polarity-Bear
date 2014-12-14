@@ -19,7 +19,7 @@ public class CharacterControls : MonoBehaviour {
 	bool affectedByPolarity = false;
 //	public float xzAirDrag = 0.985f;
 	float xzAirDrag = 1f;
-	
+	public AudioSource footsteps;
 	
 	void Awake () {
 		rigidbody.freezeRotation = true;
@@ -87,6 +87,22 @@ public class CharacterControls : MonoBehaviour {
 	void Update(){
 		// Add air resistance
 //		rigidbody.velocity = new Vector3(rigidbody.velocity.x*xzAirDrag, rigidbody.velocity.y, rigidbody.velocity.z*xzAirDrag);	
+		// play footsteps
+		if (grounded) {
+			Debug.Log("on ground");
+			if(!footsteps.isPlaying && (Math.Abs(rigidbody.velocity.x) > 0.5 || Math.Abs(rigidbody.velocity.z) > 0.5)){
+				footsteps.Play();
+				Debug.Log("Play footsteps!");
+			}else if(footsteps.isPlaying && (Math.Abs(rigidbody.velocity.x) < 0.5 && Math.Abs(rigidbody.velocity.z) < 0.5)){
+				footsteps.Stop();
+				Debug.Log("Stop playing, still on ground");
+			}
+		} else {
+			if(footsteps.isPlaying){
+				footsteps.Stop();		
+				Debug.Log("Stop playing, not on ground");
+			}
+		}
 	}
 	
 	void OnCollisionStay (Collision collisionInfo) {
