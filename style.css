@@ -16,7 +16,7 @@ h1,h2,h3,h4{
 
 h1{
 	margin-top: 50px;
-margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 
 header {
@@ -36,13 +36,9 @@ header {
 	box-shadow: inset 0px -180px 167px -81px rgba(17,17,17,1);
 }
 
-header .container {
-
-}
-
 #cover-text {
 	line-height: 100px;
-	margin-bottom: 100px;
+	margin-bottom: 150px;
 	font-family: 'Changa One'; /*, cursive;*/
 	font-size: 8em;
 	text-shadow: 0 0 20px #00DDFF;
