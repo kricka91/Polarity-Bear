@@ -1,0 +1,58 @@
+@import url(http://fonts.googleapis.com/css?family=Changa+One:400,400italic);
+
+body {
+	background-color: #111;
+	color: #ddd;
+}
+
+h1,h2,h3,h4{
+	font-family: 'Changa One';
+	font-style: italic;
+	text-shadow: 0 0 5px #00DDFF;
+}
+
+header {
+	text-align: center;
+	color: #fff;
+	background-attachment: scroll;
+	background-image: url(beargate.jpg);
+	background-position: center center;
+	background-repeat: none;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	-o-background-size: cover;
+	padding-top: 100px;
+	-webkit-box-shadow: inset 0px -180px 167px -81px rgba(17,17,17,1);
+-moz-box-shadow: inset 0px -180px 167px -81px rgba(17,17,17,1);
+box-shadow: inset 0px -180px 167px -81px rgba(17,17,17,1);
+}
+
+header .container {
+
+}
+
+#cover-text {
+	line-height: 100px;
+	margin-bottom: 100px;
+	font-family: 'Changa One'; /*, cursive;*/
+	font-size: 8em;
+	text-shadow: 0 0 20px #00DDFF;
+}
+
+.gif-grid :first-child{
+	max-height: 250px;
+	background-attachment: scroll;
+	background-position: center center;
+	background-repeat: none;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	-o-background-size: cover;
+	margin: 10px initial;
+}
+
+footer {
+	/*text-align: center;*/
+	font-style: italic;
+}
